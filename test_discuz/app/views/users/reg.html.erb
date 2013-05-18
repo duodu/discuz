@@ -1,0 +1,24 @@
+<% @user.errors.full_messages.each do |msg| %>
+ <div style="color: red">
+  <li><%= msg %></li>
+ </div>
+<% end %>
+<%= form_for @user,:url => { :action => "reg_submit" } do |f| %>
+  <div class="field">
+    <p><%= f.label "username" %></p>
+    <p><%= f.text_field :name %></p>
+  </div>
+  <div class="field">
+    <p><%= f.label "password" %></p>
+    <p><%= f.password_field :password %></p>
+  </div>
+  <div class="field">
+  	<p><%= label_tag "repeat password" %></p>
+  	<p><%= f.password_field :password_confirmation %></p>
+  </div>
+  <div class="actions">
+    <%= f.submit "regist" %>
+  </div>
+<% end %>
+<br />
+<%= link_to 'Back', :controller => "articles", :action => "list" %>

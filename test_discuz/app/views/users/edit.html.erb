@@ -1,0 +1,26 @@
+<% if flash[:notice] %>
+  <div style="color: red">
+  	<% flash[:notice].each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+<% end %>
+<%= form_for @user, :url => { :action => "edit_submit" } do |u| %>
+		<div class="field">
+    		<%= u.label 'username' %><br />
+    		<%= u.text_field :name %>
+  		</div>
+		<div class="field">
+    		<%= u.label 'password' %><br />
+    		<%= u.password_field :password %>
+  		</div>
+  		<div class="field">
+    		<%= u.label 'password' %><br />
+    		<%= u.password_field :password_confirmation %>
+  		</div>	
+  	<div class="actions"><br />
+    	<%= u.submit %>
+  	</div>
+  	<br />
+	<%= link_to 'Back', :controller => "articles", :action => "list" %>
+<% end %>

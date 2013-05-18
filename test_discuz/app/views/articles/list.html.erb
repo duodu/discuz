@@ -1,0 +1,43 @@
+<% if flash[:notice] %>
+  <div style="color: red">
+  	<% flash[:notice].each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+<% end %>
+<% if @user == nil then %>
+	<%= form_tag :controller=>"users", :action=>"login" do %>
+	<%= label_tag "name" %>
+	<%= text_field_tag :name %>
+	<%= label_tag "password" %>
+	<%= password_field_tag :password %>
+	<%= submit_tag "login" %>
+	<% end %>
+	<%= link_to "regist", :controller => "users", :action => "reg"%>
+<% else %>
+	<b>Welcome:</b>
+	<%= @user.name %>
+	<%= link_to "logout", :controller => "users", :action => "logout"%>
+	<%= link_to "edit", :controller => "users", :action => "edit", :id => @user.id %>
+<% end %>
+<h1>Listing articles</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Auther</th>
+    <th>Create Time</th>
+    <th>Last updated Time</th>
+  </tr>
+<% @articles.each do |article| %>
+  <tr>
+    <td><%= article.id %></td>
+    <td><%= link_to "#{article.title}", :action => "show", :id => article.id %></td>
+    <td><%= article.user.name %></td>
+    <td><%= article.submit_date.strftime("%Y-%m-%d %H:%M:%S") %></td>
+    <td><%= article.last_edit_date.strftime("%Y-%m-%d %H:%M:%S") %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<%= link_to 'Publish Article', :action => "publish" %>

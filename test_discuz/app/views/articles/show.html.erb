@@ -1,0 +1,46 @@
+<% if flash[:notice] %>
+  <div style="color: red">
+  	<% flash[:notice].each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+<% end %>
+<% @articles.each do |f| %>
+<% if f.top_id == f.id %>
+  <p>
+	<h1>
+		<b>Title:</b>
+		<%= f.title %>
+	</h1>
+	<b>Auther:</b>
+	<%= f.user.name %>
+  </p>
+  <p>
+  	<b>Content:</b><br />
+    <%= f.content %>
+  </p>
+  <% if f.user_id == session[:user_id] %>
+  	<p><%= link_to 'Edit', :action => "edit", :id => f.id %></p>
+  <% end %>
+<% else %>
+<p>
+  <b>Auther:</b>
+  <%= f.user.name %>
+</p>
+<p>
+  <b>Comment:</b><br />
+  <%= f.content %>
+</p>
+  <% if f.user_id == session[:user_id] %>
+  	<p><%= link_to 'Edit', :action => "edit", :id => f.id %></p>
+  <% end %>
+<% end %>
+
+<% end %>
+<%= form_for @article, :url => {:action => "post"} do |a| %>
+<p><%= label_tag 'Comment' %></p>
+<p><%= a.text_area :content %></p>
+<%= hidden_field_tag :id, params[:id] %> 
+<p><%= a.submit 'post' %></p>
+<% end %>
+<%= link_to 'Back', :action => "list" %>
