@@ -14,25 +14,32 @@
 	</h1>
 	<b>Auther:</b>
 	<%= f.user.name %>
-  </p>
-  <p>
-  	<b>Content:</b><br />
+	<br />
+  	<b>Content:</b>
+  	<br />
     <%= f.content %>
   </p>
   <% if f.user_id == session[:user_id] %>
-  	<p><%= link_to 'Edit', :action => "edit", :id => f.id %></p>
+  	<p>
+  		<%= link_to 'Edit', :action => "edit", :id => f.id %>
+  		<%= link_to 'Delete', :action => "delete", :id => f.id %>
+  	</p>
+  	
   <% end %>
 <% else %>
 <p>
   <b>Auther:</b>
   <%= f.user.name %>
-</p>
-<p>
-  <b>Comment:</b><br />
+  <br />
+  <b>Comment:</b>
+  <br />
   <%= f.content %>
 </p>
   <% if f.user_id == session[:user_id] %>
-  	<p><%= link_to 'Edit', :action => "edit", :id => f.id %></p>
+  	<p>
+  		<%= link_to 'Edit', :action => "edit", :id => f.id %>
+  		<%= link_to 'Delete', :action => "delete", :id => f.id %>
+  	</p>
   <% end %>
 <% end %>
 

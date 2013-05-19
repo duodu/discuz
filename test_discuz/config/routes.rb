@@ -12,6 +12,7 @@ TestDiscuz::Application.routes.draw do
   match "users/reg_submit" => "users#reg_submit"
   match "users/edit/:id" => "users#edit"
   match "users/edit_submit/:id" => "users#edit_submit"
+  match "articles/delete/:id" => "articles#delete"
   root :to => "articles#list"
   # The priority is based upon order of creation:
   # first created -> highest priority.
