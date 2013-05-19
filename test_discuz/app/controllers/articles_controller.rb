@@ -83,6 +83,7 @@ class ArticlesController < ApplicationController
   def edit_submit
     @article = Article.find(params[:id])
     date = Time.new.strftime("%Y%m%d%H%M%S")
+    #更新帖子的时间
     if session[:user_id] == @article.user_id
       if @article.update_attributes(params[:article])
         @article.update_attributes(:last_edit_date => date)
