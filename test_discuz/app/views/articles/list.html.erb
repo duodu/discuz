@@ -36,7 +36,7 @@
     <td><%= link_to "#{article.title}", :action => "show", :id => article.id %></td>
     <td><%= article.user.name %></td>
     <td><%= article.submit_date.strftime("%Y-%m-%d %H:%M:%S") %></td>
-    <td align="middle"><%= article.comments.count %></td>
+    <td align="middle"><%= article.comments.count-1 %></td>
     <td><%= article.last_edit_date.strftime("%Y-%m-%d %H:%M:%S") %></td>
   </tr>
 <% end %>
