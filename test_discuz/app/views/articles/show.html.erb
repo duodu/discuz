@@ -21,7 +21,7 @@
 	  </p>
 	  <% if f.user_id == session[:user_id] %>
 	  	<p>
-	  		<%= link_to 'Edit', :action => "edit", :id => f.id %>
+	  		<%= link_to 'Edit', :action => "edit", :id => f.id, :num => @num.to_i %>
 	  		<%= link_to 'Delete', :action => "delete", :id => f.id %>
 	  	</p>
 	  <% end %>
@@ -36,7 +36,7 @@
 	</p>
 	  <% if f.user_id == session[:user_id] %>
 	  	<p>
-	  		<%= link_to 'Edit', :action => "edit", :id => f.id %>
+	  		<%= link_to 'Edit', :action => "edit", :id => f.id, :num => @num.to_i %>
 	  		<%= link_to 'Delete', :action => "delete", :id => f.id %>
 	  	</p>
 	  <% end %>

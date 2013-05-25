@@ -75,6 +75,7 @@ class ArticlesController < ApplicationController
   def edit
     @article = Article.find(params[:id])
     @user = User.find(session[:user_id])
+    @num = params[:num]
     if @article.user_id != @user.id
       redirect_to :action => "list"
     end

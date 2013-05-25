@@ -25,5 +25,5 @@
     	<%= f.submit %>
   	</div>
   	<br />
-	<%= link_to 'Back', :action => "show", :id => @article.top_id %>
+	<%= link_to 'Back', :action => "show", :id => @article.top_id, :num => @num.to_i %>
 <% end %>
