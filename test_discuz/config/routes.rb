@@ -2,7 +2,7 @@ TestDiscuz::Application.routes.draw do
   match "articles/list" => "articles#list"
   match "articles/publish" => "articles#publish"
   match "articles/publish_submit" => "articles#publish_submit"
-  match "articles/show/:id" => "articles#show"
+  match "articles/show/:id/:num" => "articles#show"
   match "articles/post" => "articles#post"
   match "articles/edit/:id" => "articles#edit"
   match "articles/edit_submit/:id" => "articles#edit_submit"

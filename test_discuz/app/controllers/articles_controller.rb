@@ -32,7 +32,7 @@ class ArticlesController < ApplicationController
       if @article.save
         id = @article.id
         @article.update_attributes(:top_id => id)
-        redirect_to :action => "show", :id => id
+        redirect_to :action => "show", :id => id, :num => 5
         flash[:notice] = ["Successfully published"]
       else
         redirect_to :action => "publish"
@@ -60,11 +60,11 @@ class ArticlesController < ApplicationController
       if @article.save
         @top = Article.find(params[:id])
         @top.update_attributes(:last_edit_date => date)
-        redirect_to :action => "show", :id => top_id
+        redirect_to :action => "show", :id => top_id, :num => 5
         flash[:notice] = ["Successfully post"]
       else
         flash[:notice] = @article.errors.full_messages
-        redirect_to :action => "show", :id => top_id
+        redirect_to :action => "show", :id => top_id, :num => 5
       end
     else
       redirect_to :action => "list"
@@ -87,7 +87,7 @@ class ArticlesController < ApplicationController
     if session[:user_id] == @article.user_id
       if @article.update_attributes(params[:article])
         @article.update_attributes(:last_edit_date => date)
-        redirect_to :action => "show", :id => @article.top_id
+        redirect_to :action => "show", :id => @article.top_id, :num => 5
         flash[:notice] = ["Successfully updated"]
       else
         redirect_to :action => "edit", :id => @article.id
@@ -110,11 +110,21 @@ class ArticlesController < ApplicationController
     end
   end
   #查看帖子
+  #可以分页查看，每页5条
   def show
     top_id = params[:id]
-    @articles = Article.where(["top_id = ?", top_id])
+    @num = params[:num]
+    @articles = Article.where(["top_id = ?", top_id]).limit(5).offset(@num.to_i-5)
     if @articles.empty?
       redirect_to :action => "list"
+    end
+    @next_page = false
+    @prev_page = false
+    if Article.where(["top_id = ?", top_id]).last.id > @articles.last.id
+      @next_page = true
+    end
+    if Article.where(["top_id = ?", top_id]).first.id < @articles.first.id
+      @prev_page = true
     end
     @article = Article.new
   end
