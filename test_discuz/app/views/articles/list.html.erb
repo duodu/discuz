@@ -1,3 +1,4 @@
+<%= javascript_include_tag "login.js" %>
 <% if flash[:notice] %>
   <div style="color: red">
   	<% flash[:notice].each do |msg| %>
@@ -5,21 +6,16 @@
     <% end %>
   </div>
 <% end %>
-<% if @user == nil then %>
-	<%= form_tag :controller=>"users", :action=>"login" do %>
-	<%= label_tag "name" %>
-	<%= text_field_tag :name %>
-	<%= label_tag "password" %>
-	<%= password_field_tag :password %>
-	<%= submit_tag "login" %>
+<div id="login">
+	<%= form_tag "/articles/list/login", :remote => true, :id =>"lf" do %>
+		<%= label_tag "name" %>
+		<%= text_field_tag :name %>
+		<%= label_tag "password" %>
+		<%= password_field_tag :password %>
+		<%= submit_tag "login" %>
 	<% end %>
 	<%= link_to "regist", :controller => "users", :action => "reg"%>
-<% else %>
-	<b>Welcome:</b>
-	<%= @user.name %>
-	<%= link_to "logout", :controller => "users", :action => "logout"%>
-	<%= link_to "edit", :controller => "users", :action => "edit", :id => @user.id %>
-<% end %>
+</div>
 <h1>Listing articles</h1>
 <table>
   <tr>

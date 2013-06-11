@@ -45,15 +45,19 @@ class UsersController < ApplicationController
   end
   #登录
   def login
-    uname=params[:name]
-    upass=params[:password]
+    uname=request[:name]
+    upass=request[:password]
     user=User.find_by_name_and_password(uname,upass)
     session[:user_id]=nil
     if user
       session[:user_id]=user.id
       @user=User.find(user.id)
       flash[:notice] = ["Successfully login"]
-      redirect_to :controller => "articles", :action => "list"
+      respond_to do |format|
+        format.html { render :layout => false }
+        format.xml { render :xml => @users}
+      end
+      #redirect_to :controller => "articles", :action => "list"
     else
       redirect_to :controller => "articles", :action => "list"
       flash[:notice] = ["login failed"]

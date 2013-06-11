@@ -1,0 +1,4 @@
+<b>Welcome:</b>
+<%= @user.name %>
+<%= link_to "logout", :controller => "users", :action => "logout"%>
+<%= link_to "edit", :controller => "users", :action => "edit", :id => @user.id %>
